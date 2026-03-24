@@ -248,8 +248,7 @@ body {
   .info-section .subtitle {
     font-size: clamp(0.75rem, 0.5rem + 1vw, 1rem);
   }
-  .info-section .label,
-  .portfolio-item__info .label {
+  .info-section .label {
     font-size: clamp(0.5625rem, 0.4rem + 0.6vw, 0.6875rem);
   }
   .info-section .body-text {
@@ -343,6 +342,10 @@ body {
 .portfolio-item__info {
   margin-top: var(--space-xs);
   align-items: first baseline;
+}
+
+.portfolio-item__info .label {
+  font-size: clamp(0.6875rem, 0.55rem + 0.5vw, 0.8125rem);
 }
 
 .portfolio-item__number {
