@@ -429,7 +429,7 @@ body {
 /* Cover header — mirrors site header grid governance */
 .cover__header {
   flex-shrink: 0;
-  padding-block: var(--space-lg) 0;
+  padding-block: var(--space-lg) var(--space-md);
   color: var(--cover-line);
 }
 
@@ -687,7 +687,7 @@ body {
 .modal-sticky-nav {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-lg) 0;
+  padding-block: var(--space-lg) var(--space-sm);
   background-color: transparent;
   border-bottom: 1px solid transparent;
 }
@@ -705,7 +705,7 @@ body {
 }
 
 .modal__header {
-  padding-block: var(--space-lg) var(--space-md);
+  padding-block: var(--space-sm) var(--space-md);
 }
 
 .modal__title-row {
