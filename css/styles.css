@@ -254,6 +254,9 @@ body {
   .info-section .body-text {
     font-size: clamp(0.75rem, 0.5rem + 1vw, 1rem);
   }
+  .currently-suffix {
+    display: none;
+  }
 }
 
 /* Tablet: explicit placement on 8-col grid */
@@ -402,9 +405,6 @@ body {
   --cover-line: #131616;
   --cover-fade: 0.5s;
   --cover-pad: var(--space-sm); /* governs uniform padding, used in max-width calc */
-}
-
-.cover {
   position: fixed;
   inset: 0;
   z-index: 10001;
@@ -1107,14 +1107,22 @@ body {
     margin: 15mm 20mm;
   }
 
-  /* Hide modal chrome */
+  /* Hide non-print elements */
+  .cover,
+  .site-header,
   .modal-sticky-nav,
-  .modal__header {
+  .modal__header,
+  .modal__close,
+  .skip-link,
+  .grid-reveal,
+  .contact-form__submit {
     display: none !important;
   }
 
   /* Force clean print colors */
   .modal {
+    display: block;
+    min-height: auto;
     background-color: #FFFFFF !important;
     color: #131616 !important;
   }
@@ -1124,10 +1132,10 @@ body {
     animation: none !important;
   }
 
-  /* Reuse shared density rules */
+  /* Resume density rules */
   .resume .resume__header { margin-bottom: 1rem !important; }
   .resume .resume__section { margin-bottom: 1rem !important; }
-  .resume .resume__row { margin-bottom: 0.5rem !important; }
+  .resume .resume__row { margin-bottom: 0.5rem !important; break-inside: avoid; }
   .resume .resume__name { margin-bottom: 0.25rem !important; }
   .resume .resume__title { margin-bottom: 0.5rem !important; }
   .resume .resume__contact-list { gap: 0 !important; }
@@ -1145,6 +1153,7 @@ body {
     border: 1px solid #131616;
   }
 
+  .resume__section { break-inside: avoid; }
   .resume__date { display: block !important; }
   .resume__date-mobile { display: none !important; }
 }
@@ -1215,41 +1224,6 @@ body {
 .contact-form__error {
   color: var(--accent);
   margin-bottom: var(--space-sm);
-}
-
-/* --------------------------------
-   Print Styles
-   -------------------------------- */
-@media print {
-  .cover,
-  .site-header,
-  .modal-sticky-nav,
-  .modal__close,
-  .skip-link,
-  .grid-reveal {
-    display: none !important;
-  }
-
-  .modal {
-    display: block;
-    min-height: auto;
-  }
-
-  .modal__body {
-    animation: none;
-  }
-
-  .contact-form__submit {
-    display: none;
-  }
-
-  .resume__section {
-    break-inside: avoid;
-  }
-
-  .resume__row {
-    break-inside: avoid;
-  }
 }
 
 /* --------------------------------
