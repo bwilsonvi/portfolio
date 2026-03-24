@@ -31,14 +31,14 @@
   --body-weight: 400;
   --body-line-height: 1.4;
 
-  /* Spacing (8pt scale) */
-  --space-xs: 0.5rem;    /* 8px */
-  --space-sm: 1rem;       /* 16px */
-  --space-md: 1.5rem;     /* 24px */
-  --space-lg: 2rem;       /* 32px */
-  --space-xl: 3rem;       /* 48px */
-  --space-2xl: 4rem;      /* 64px */
-  --space-3xl: 6rem;      /* 96px */
+  /* Spacing (fluid 8pt scale — scales proportionally with typography) */
+  --space-xs: 0.5rem;                                  /* 8px (fixed — too small to matter) */
+  --space-sm: 1rem;                                    /* 16px (fixed — baseline unit) */
+  --space-md: clamp(1.25rem, 1rem + 0.5vw, 1.5rem);   /* 20px → 24px */
+  --space-lg: clamp(1.5rem, 1.25rem + 0.75vw, 2rem);  /* 24px → 32px */
+  --space-xl: clamp(2rem, 1.5rem + 1.5vw, 3rem);      /* 32px → 48px */
+  --space-2xl: clamp(2.5rem, 1.75rem + 2.5vw, 4rem);  /* 40px → 64px */
+  --space-3xl: clamp(3.5rem, 2.5rem + 3.5vw, 6rem);   /* 56px → 96px */
 }
 
 /* --------------------------------
