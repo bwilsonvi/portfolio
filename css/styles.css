@@ -828,7 +828,7 @@ body {
 
 .case-study-meta {
   padding-bottom: 0;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
   align-items: first baseline;
   row-gap: var(--space-md);
 }
