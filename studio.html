@@ -29,6 +29,13 @@
 <body class="theme-studio">
   <script>sessionStorage.setItem('portfolio_nav', '1');</script>
 
+  <!-- Netlify Forms: hidden pre-render so build-time scanner detects the form -->
+  <form name="contact" netlify hidden>
+    <input type="text" name="name">
+    <input type="email" name="email">
+    <textarea name="message"></textarea>
+  </form>
+
   <a href="#main-content" class="skip-link">Skip to content</a>
 
   <div class="page-content">
