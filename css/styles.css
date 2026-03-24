@@ -195,7 +195,7 @@ body {
   }
 
   .header-nav__studio {
-    grid-column: 8;
+    grid-column: 7 / span 2;
   }
 }
 
