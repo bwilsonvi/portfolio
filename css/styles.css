@@ -143,7 +143,7 @@ body {
    Header
    -------------------------------- */
 .site-header {
-  padding-block: var(--space-lg) var(--space-md);
+  padding-block: var(--space-lg) 0;
 }
 
 /* Mobile: 4-column grid */
@@ -230,7 +230,7 @@ body {
    Info Section
    -------------------------------- */
 .info-section {
-  padding-block: var(--space-md) var(--space-2xl);
+  padding-block: var(--space-lg);
 }
 
 .info-section > .container > .grid {
@@ -429,7 +429,7 @@ body {
 /* Cover header — mirrors site header grid governance */
 .cover__header {
   flex-shrink: 0;
-  padding-block: var(--space-lg) var(--space-md);
+  padding-block: var(--space-lg) 0;
   color: var(--cover-line);
 }
 
@@ -687,7 +687,7 @@ body {
 .modal-sticky-nav {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-lg) var(--space-sm);
+  padding-block: var(--space-lg) 0;
   background-color: transparent;
   border-bottom: 1px solid transparent;
 }
@@ -705,7 +705,7 @@ body {
 }
 
 .modal__header {
-  padding-block: var(--space-sm) var(--space-md);
+  padding-block: var(--space-lg) var(--space-md);
 }
 
 .modal__title-row {
@@ -827,8 +827,8 @@ body {
    -------------------------------- */
 
 .case-study-meta {
-  padding-bottom: var(--space-lg);
-  margin-bottom: var(--space-2xl);
+  padding-bottom: 0;
+  margin-bottom: var(--space-lg);
   align-items: first baseline;
   row-gap: var(--space-md);
 }
