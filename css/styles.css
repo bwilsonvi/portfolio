@@ -143,7 +143,7 @@ body {
    Header
    -------------------------------- */
 .site-header {
-  padding-block: var(--space-xl) var(--space-lg);
+  padding-block: var(--space-lg) var(--space-md);
 }
 
 /* Mobile: 4-column grid */
@@ -230,7 +230,7 @@ body {
    Info Section
    -------------------------------- */
 .info-section {
-  padding-block: var(--space-lg);
+  padding-block: var(--space-md) var(--space-2xl);
 }
 
 .info-section > .container > .grid {
@@ -333,7 +333,7 @@ body {
    Portfolio Items
    -------------------------------- */
 .portfolio-section {
-  padding-block: var(--space-lg);
+  padding-block: 0 var(--space-lg);
 }
 
 .portfolio-item {
@@ -429,7 +429,7 @@ body {
 /* Cover header — mirrors site header grid governance */
 .cover__header {
   flex-shrink: 0;
-  padding-block: var(--space-xl) var(--space-lg);
+  padding-block: var(--space-lg) var(--space-md);
   color: var(--cover-line);
 }
 
@@ -687,7 +687,7 @@ body {
 .modal-sticky-nav {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-xl) var(--space-sm);
+  padding-block: var(--space-lg) var(--space-sm);
   background-color: transparent;
   border-bottom: 1px solid transparent;
 }
@@ -705,7 +705,7 @@ body {
 }
 
 .modal__header {
-  padding-block: var(--space-lg) var(--space-md);
+  padding-block: var(--space-sm) var(--space-md);
 }
 
 .modal__title-row {
@@ -828,7 +828,7 @@ body {
 
 .case-study-meta {
   padding-bottom: var(--space-lg);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-2xl);
   align-items: first baseline;
   row-gap: var(--space-md);
 }
