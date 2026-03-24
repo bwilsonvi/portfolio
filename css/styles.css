@@ -1,0 +1,1277 @@
+/* Main Stylesheet */
+
+/* --------------------------------
+   Global
+   -------------------------------- */
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-sm);
+  background: var(--text);
+  color: var(--bg);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--body-size);
+  font-weight: 600;
+  z-index: 10000;
+  border-radius: 0 0 4px 4px;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* --------------------------------
+   Typography
+   -------------------------------- */
+.heading {
+  font-size: var(--heading-size);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  line-height: var(--heading-line-height);
+}
+
+.subtitle {
+  font-size: var(--subtitle-size);
+  font-weight: var(--subtitle-weight);
+  line-height: var(--subtitle-line-height);
+}
+
+.label {
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  line-height: var(--label-line-height);
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+}
+
+.body-text {
+  font-size: var(--body-size);
+  font-weight: var(--body-weight);
+  line-height: var(--body-line-height);
+}
+
+.statement {
+  font-size: var(--statement-size);
+  font-weight: var(--statement-weight);
+  line-height: var(--statement-line-height);
+}
+
+.statement__toggle {
+  display: inline;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.statement__toggle:hover {
+  color: var(--accent);
+}
+
+.statement__toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.statement--expanding {
+  transition: max-height 0.4s ease-out;
+  overflow: hidden;
+}
+
+/* --------------------------------
+   Links
+   -------------------------------- */
+.nav-link {
+  color: var(--text);
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--hover);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.nav-link--active {
+  color: var(--accent);
+  cursor: default;
+}
+
+.info-link {
+  color: var(--text);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.info-link:hover {
+  color: var(--hover);
+}
+
+.info-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.external-icon {
+  font-size: 0.85em;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.1em;
+  vertical-align: baseline;
+  overflow: hidden;
+}
+
+/* --------------------------------
+   Header
+   -------------------------------- */
+.site-header {
+  padding-block: var(--space-xl) var(--space-lg);
+}
+
+/* Mobile: 4-column grid */
+.header-nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-sm); /* 16px gutter */
+  align-items: baseline;
+}
+
+.header-nav__name {
+  grid-column: 1 / span 2;
+}
+
+.header-nav__name-short {
+  display: none;
+}
+
+.header-nav__work {
+  grid-column: 3;
+}
+
+.header-nav__studio {
+  grid-column: 4;
+  text-align: right;
+}
+
+/* Tablet: 8-column grid */
+@media (min-width: 768px) {
+  .header-nav {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: var(--space-md); /* 24px gutter */
+  }
+
+  .header-nav__name {
+    grid-column: 1 / span 2;
+  }
+
+  .header-nav__name-full {
+    display: none;
+  }
+
+  .header-nav__name-short {
+    display: inline;
+  }
+
+  .header-nav__work {
+    grid-column: 3;
+  }
+
+  .header-nav__studio {
+    grid-column: 8;
+  }
+}
+
+/* Desktop: 12-column grid */
+@media (min-width: 1024px) {
+  .header-nav {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .header-nav__name {
+    grid-column: 1 / span 3;
+  }
+
+  .header-nav__name-full {
+    display: inline;
+  }
+
+  .header-nav__name-short {
+    display: none;
+  }
+
+  .header-nav__work {
+    grid-column: 4;
+  }
+
+  .header-nav__studio {
+    grid-column: 11 / span 2;
+  }
+}
+
+/* --------------------------------
+   Info Section
+   -------------------------------- */
+.info-section {
+  padding-block: var(--space-lg);
+}
+
+.info-section > .container > .grid {
+  align-items: first baseline;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Mobile: fluid text scaling for tight 4-col layout */
+@media (max-width: 767.98px) {
+  .info-section .subtitle {
+    font-size: clamp(0.75rem, 0.5rem + 1vw, 1rem);
+  }
+  .info-section .label,
+  .portfolio-item__info .label {
+    font-size: clamp(0.5625rem, 0.4rem + 0.6vw, 0.6875rem);
+  }
+  .info-section .body-text {
+    font-size: clamp(0.75rem, 0.5rem + 1vw, 1rem);
+  }
+}
+
+/* Tablet: explicit placement on 8-col grid */
+@media (min-width: 768px) {
+  .info-group--status-location {
+    grid-column: 3 / span 2;
+  }
+  .info-group--experience {
+    grid-column: 5 / span 2;
+  }
+  .info-group--about {
+    grid-column: 7 / span 2;
+  }
+}
+
+/* Desktop: adjust column positions for 12-col grid */
+@media (min-width: 1024px) {
+  .info-group--status-location {
+    grid-column: 4 / span 2;
+  }
+  .info-group--experience {
+    grid-column: 6 / span 2;
+  }
+  .info-group--about {
+    grid-column: 8 / span 5;
+  }
+}
+
+.info-block {
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+/* --------------------------------
+   Content Fade In
+   -------------------------------- */
+@keyframes content-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.info-section,
+.portfolio-section,
+.modal__body {
+  animation: content-fade-in 0.35s ease-out both;
+}
+
+/* While cover is active, hide scrollbar and hold content invisible */
+.cover-active {
+  overflow: hidden;
+}
+
+.cover-active .info-section,
+.cover-active .portfolio-section {
+  animation: none;
+  opacity: 0;
+}
+
+/* When cover bg starts fading, reveal work page content behind it */
+.cover-active.cover-revealing .info-section,
+.cover-active.cover-revealing .portfolio-section {
+  opacity: 1;
+}
+
+/* After cover dismissal, skip the content fade-in animation.
+   This class persists — never added on normal navigation. */
+.cover-entered .info-section,
+.cover-entered .portfolio-section {
+  animation: none;
+}
+
+
+/* --------------------------------
+   Portfolio Items
+   -------------------------------- */
+.portfolio-section {
+  padding-block: var(--space-lg);
+}
+
+.portfolio-item {
+  margin-bottom: var(--space-2xl);
+}
+
+.portfolio-item__info {
+  margin-top: var(--space-xs);
+  align-items: first baseline;
+}
+
+.portfolio-item__number {
+  grid-column: 1;
+}
+
+.portfolio-item__text {
+  grid-column: 2 / -1;
+}
+
+.portfolio-item__teaser {
+  opacity: 0.7;
+}
+
+.portfolio-item__placeholder {
+  position: relative;
+  background-color: var(--placeholder);
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+}
+
+.portfolio-item__placeholder:has(img) {
+  aspect-ratio: auto;
+}
+
+.portfolio-item__placeholder img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.portfolio-item__placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 0 var(--accent), inset 0 0 0 0 #C0C0C0;
+  transition: box-shadow 0.2s ease;
+}
+
+.portfolio-item__placeholder[data-modal]:hover::after {
+  box-shadow: inset 0 0 0 8px var(--accent), inset 0 0 0 9px #C0C0C0;
+}
+
+
+/* --------------------------------
+   Cover
+   -------------------------------- */
+
+/* --- Tokens (override to restyle) --- */
+.cover {
+  --cover-bg: #EDEDF0;
+  --cover-line: #131616;
+  --cover-fade: 0.5s;
+  --cover-pad: var(--space-sm); /* governs uniform padding, used in max-width calc */
+}
+
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background-color: var(--cover-bg);
+  opacity: 1;
+  transition:
+    background-color 0.6s ease-out,
+    opacity var(--cover-fade) ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+/* Phase 1: bg goes transparent so work page shows through retracting lines */
+.cover.cover--bg-fade {
+  background-color: transparent;
+}
+
+/* Phase 2: everything remaining fades out */
+.cover.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Cover header — mirrors site header grid governance */
+.cover__header {
+  flex-shrink: 0;
+  padding-block: var(--space-xl) var(--space-lg);
+  color: var(--cover-line);
+}
+
+/* Mobile: 4-column grid — title row 1, year row 2 right-aligned */
+.cover-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  align-items: baseline;
+}
+
+.cover-nav__title,
+.cover-nav__year {
+  white-space: nowrap;
+}
+
+.cover-nav__title {
+  grid-column: 1 / -1;
+}
+
+.cover-nav__year {
+  grid-column: -2 / -1;
+  text-align: right;
+}
+
+/* Tablet: 8-column grid — single row */
+@media (min-width: 768px) {
+  .cover-nav {
+    grid-template-columns: repeat(8, 1fr);
+    gap: var(--space-md);
+  }
+
+  .cover-nav__title {
+    grid-column: 1 / span 5;
+  }
+
+  .cover-nav__year {
+    grid-column: 8;
+    grid-row: 1;
+  }
+}
+
+/* Desktop: 12-column grid */
+@media (min-width: 1024px) {
+  .cover-nav {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .cover-nav__title {
+    grid-column: 1 / span 8;
+  }
+
+  .cover-nav__year {
+    grid-column: 12;
+  }
+}
+
+/* Artwork wrapper — fills remaining flex space at all breakpoints.
+   Lines extend the full vertical space; diamonds centered within. */
+.cover__artwork {
+  flex: 1 1 0;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  padding-bottom: var(--cover-pad);
+}
+
+/* Container passes height down; flex column so art-clip can grow */
+.cover__artwork > .container {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 100%;
+}
+
+/* Clip div fills available height — CSS lines extend full vertical space.
+   SVG diamonds are vertically centered and cropped (not scaled) when
+   vertical space is tight, preserving line weights. */
+.cover__art-clip {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Vertical lines via CSS gradient — JS snaps --line-w to whole pixels
+   and adjusts --line-period so first & last line sit flush on column edges. */
+.cover__art-clip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to right,
+    var(--cover-line) 0 var(--line-w, 3px),
+    transparent var(--line-w, 3px) var(--line-period, 12px)
+  );
+  pointer-events: none;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Lines retract upward from bottom before cover fades */
+.cover--lines-retract .cover__art-clip::before {
+  clip-path: inset(0 0 100% 0);
+}
+
+/* Horizontal lines fade first (avoids grid effect with verticals) */
+.cover__h-lines {
+  transition: opacity 150ms ease-out;
+}
+
+.cover--h-fade .cover__h-lines {
+  opacity: 0;
+}
+
+/* Diamond fills fade and slide down after horizontal lines are gone */
+.cover__fill {
+  transition: opacity 300ms ease-out, translate 300ms ease-out;
+}
+
+.cover--diamonds-fade .cover__fill {
+  opacity: 0;
+  translate: 0 40px;
+}
+
+/* SVG artwork — never shrinks; cropped by parent when space is tight */
+.cover__art {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  margin-inline: auto;
+}
+
+/* Tablet+: no overrides needed — same stretching/centering behaviour */
+
+/* SVG element fills — tokenized for easy restyling */
+.cover__line { fill: var(--cover-line); }
+.cover__fill { fill: var(--cover-bg); }
+
+/* Tablet: match container margins */
+@media (min-width: 768px) {
+  .cover {
+    --cover-pad: var(--space-lg); /* 32px */
+  }
+}
+
+/* Desktop: match container margins */
+@media (min-width: 1024px) {
+  .cover {
+    --cover-pad: var(--space-md); /* 24px */
+  }
+}
+
+/* --------------------------------
+   Grid Debug Overlay (keyboard 'G' toggle)
+   -------------------------------- */
+.grid-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.grid-reveal .container {
+  height: 100%;
+}
+
+.grid-reveal__columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  height: 100%;
+}
+
+.grid-reveal__col {
+  height: 100%;
+  border-left: 1px solid rgba(233, 62, 31, 0.15);
+  border-right: 1px solid rgba(233, 62, 31, 0.15);
+  border-left: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.grid-reveal__col span {
+  display: block;
+  text-align: left;
+  padding-top: var(--space-xs);
+  font-family: var(--font-family);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-tracking);
+  color: rgba(233, 62, 31, 0.5);
+  color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+/* Mobile: show columns 1–4 only */
+.grid-reveal__col:nth-child(n+5) {
+  display: none;
+}
+
+/* Tablet: show columns 1–8 */
+@media (min-width: 768px) {
+  .grid-reveal__columns {
+    grid-template-columns: repeat(8, 1fr);
+    gap: var(--space-md);
+  }
+
+  .grid-reveal__col:nth-child(n+5) {
+    display: block;
+  }
+
+  .grid-reveal__col:nth-child(n+9) {
+    display: none;
+  }
+}
+
+/* Desktop: show all 12 columns */
+@media (min-width: 1024px) {
+  .grid-reveal__columns {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .grid-reveal__col:nth-child(n+9) {
+    display: block;
+  }
+}
+
+
+/* --------------------------------
+   Modal Overlay
+   -------------------------------- */
+.modal {
+  display: none;
+  position: relative;
+  z-index: 1000;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  outline: none;
+}
+
+.modal.is-active {
+  display: block;
+}
+
+
+
+.modal-sticky-nav__inner {
+  display: flex;
+  align-items: center;
+}
+
+.modal-sticky-nav {
+  position: relative;
+  z-index: 1;
+  padding-block: var(--space-xl) var(--space-sm);
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.modal-sticky-nav.is-sticky {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg);
+  border-bottom-color: rgba(19, 22, 22, 0.12);
+}
+
+.modal-sticky-nav.is-hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal__header {
+  padding-block: var(--space-lg);
+}
+
+.modal__title-row {
+  align-items: first baseline;
+}
+
+.modal__title-number {
+  grid-column: 1;
+}
+
+.modal__title-number:empty {
+  display: none;
+}
+
+.modal__title-number:empty + .modal-nav__title {
+  grid-column: 1 / -1;
+}
+
+.modal-nav__title {
+  grid-column: 2 / -1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.modal__close .material-symbols-outlined {
+  font-size: var(--heading-size);
+  font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 40;
+  margin-left: -0.15em;
+}
+
+.modal__close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.modal__close:hover {
+  color: var(--hover);
+}
+
+/* Resume actions — hidden by default, shown only for resume modal */
+.modal__print,
+.modal__download {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0;
+  transition: color 0.2s ease;
+  align-items: center;
+}
+
+.modal__print {
+  margin-left: auto;
+}
+
+.modal__download {
+  margin-left: var(--space-sm);
+}
+
+.modal--resume .modal__print,
+.modal--resume .modal__download {
+  display: flex;
+}
+
+.modal__print .material-symbols-outlined,
+.modal__download .material-symbols-outlined {
+  font-size: var(--heading-size);
+  font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 40;
+}
+
+.modal__print:focus-visible,
+.modal__download:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.modal__print:hover,
+.modal__download:hover {
+  color: var(--hover);
+}
+
+.modal__download.is-busy {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.modal__body {
+  padding-block: var(--space-lg);
+}
+
+.portfolio-item__placeholder[data-modal] {
+  cursor: pointer;
+}
+
+.portfolio-item__placeholder[data-modal]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+
+/* --------------------------------
+   Case Study (Portfolio Detail)
+   -------------------------------- */
+
+.case-study-meta {
+  padding-bottom: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  align-items: first baseline;
+  row-gap: var(--space-md);
+}
+
+.case-study-meta .statement {
+  margin: 0;
+  padding-bottom: var(--space-sm);
+}
+
+.case-study-block {
+  margin-bottom: var(--space-2xl);
+}
+
+.case-study-image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: var(--placeholder);
+}
+
+.case-study-image-placeholder:has(img) {
+  aspect-ratio: auto;
+}
+
+.case-study-image-placeholder img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.case-study-block picture {
+  display: block;
+  width: 100%;
+}
+
+.case-study-block picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Mobile: fluid text scaling for case study meta */
+@media (max-width: 767.98px) {
+  .case-study-meta .label {
+    font-size: clamp(0.5625rem, 0.4rem + 0.6vw, 0.6875rem);
+  }
+  .case-study-meta .body-text {
+    font-size: clamp(0.75rem, 0.5rem + 1vw, 1rem);
+  }
+}
+
+/* --------------------------------
+   Resume
+   -------------------------------- */
+
+/* Reset h2 margin for resume section headings */
+.resume h2 {
+  margin: 0;
+}
+
+/* Header: photo + name/contact + personal details */
+.resume__header {
+  margin-bottom: var(--space-2xl);
+  align-items: start;
+}
+
+.resume__photo {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: var(--placeholder);
+}
+
+.resume__header-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.resume__name {
+  margin-bottom: var(--space-xs);
+}
+
+.resume__title {
+  margin-bottom: var(--space-sm);
+}
+
+.resume__contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Personal details — below header on mobile, side column on tablet+ */
+.resume__personal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.resume__personal-item {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .resume__personal {
+    margin-top: 0;
+  }
+}
+
+/* Mobile: proportional text scaling to maintain size contrast */
+@media (max-width: 767.98px) {
+  .resume .subtitle {
+    font-size: clamp(0.75rem, 0.5rem + 1vw, 1rem);
+  }
+  .resume .body-text {
+    font-size: clamp(0.75rem, 0.5rem + 1vw, 1rem);
+  }
+  .resume .label {
+    font-size: clamp(0.5625rem, 0.4rem + 0.6vw, 0.6875rem);
+  }
+}
+
+/* Sections */
+.resume__section {
+  margin-bottom: var(--space-2xl);
+}
+
+.resume__row {
+  margin-bottom: var(--space-md);
+  align-items: first baseline;
+}
+
+.resume__entry {
+  display: flex;
+  flex-direction: column;
+}
+
+.resume__desc {
+  margin-top: var(--space-xs);
+  font-weight: var(--body-weight);
+}
+
+/* Dates — hidden on mobile, visible on tablet+ */
+.resume__date {
+  display: none;
+}
+
+/* Skills as scannable items */
+.resume__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+}
+
+/* Languages */
+.resume__languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+}
+
+.resume__language-item {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.resume__proficiency {
+  opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+  .resume__date-mobile {
+    display: none;
+  }
+
+  .resume__date {
+    display: block;
+  }
+}
+
+/* --------------------------------
+   Resume PDF/Print — shared density styles
+   .resume--pdf is toggled by JS during PDF generation.
+   @media print applies the same rules for browser print.
+   -------------------------------- */
+.resume--pdf,
+.resume--pdf .heading,
+.resume--pdf .subtitle,
+.resume--pdf .body-text,
+.resume--pdf .label {
+  color: #131616;
+}
+
+.resume--pdf {
+  background-color: #FFFFFF;
+}
+
+.resume--pdf .resume__header {
+  margin-bottom: 1rem;
+}
+
+.resume--pdf .resume__section {
+  margin-bottom: 1rem;
+}
+
+.resume--pdf .resume__row {
+  margin-bottom: 0.5rem;
+}
+
+.resume--pdf .resume__name {
+  margin-bottom: 0.25rem;
+}
+
+.resume--pdf .resume__title {
+  margin-bottom: 0.5rem;
+}
+
+.resume--pdf .resume__contact-list {
+  gap: 0;
+}
+
+.resume--pdf .resume__personal {
+  gap: 0.5rem;
+}
+
+.resume--pdf .resume__desc {
+  margin-top: 0.25rem;
+}
+
+.resume--pdf .heading {
+  font-size: 1.375rem;
+}
+
+.resume--pdf .subtitle {
+  font-size: 0.75rem;
+}
+
+.resume--pdf .body-text {
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.resume--pdf .label {
+  font-size: 0.5625rem;
+  line-height: 1.1;
+}
+
+.resume--pdf .resume__skills,
+.resume--pdf .resume__languages {
+  gap: 0.25rem 1rem;
+}
+
+.resume--pdf .resume__photo {
+  background-color: transparent;
+  border: 1px solid #131616;
+}
+
+.resume--pdf .resume__date {
+  display: block;
+}
+
+.resume--pdf .resume__date-mobile {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 20mm;
+  }
+
+  /* Hide modal chrome */
+  .modal-sticky-nav,
+  .modal__header {
+    display: none !important;
+  }
+
+  /* Force clean print colors */
+  .modal {
+    background-color: #FFFFFF !important;
+    color: #131616 !important;
+  }
+
+  .modal__body {
+    padding-block: 0 !important;
+    animation: none !important;
+  }
+
+  /* Reuse shared density rules */
+  .resume .resume__header { margin-bottom: 1rem !important; }
+  .resume .resume__section { margin-bottom: 1rem !important; }
+  .resume .resume__row { margin-bottom: 0.5rem !important; }
+  .resume .resume__name { margin-bottom: 0.25rem !important; }
+  .resume .resume__title { margin-bottom: 0.5rem !important; }
+  .resume .resume__contact-list { gap: 0 !important; }
+  .resume .resume__personal { gap: 0.5rem !important; }
+  .resume .resume__desc { margin-top: 0.25rem !important; }
+  .resume .heading { font-size: 1.375rem !important; }
+  .resume .subtitle { font-size: 0.75rem !important; }
+  .resume .body-text { font-size: 0.75rem !important; line-height: 1.3 !important; }
+  .resume .label { font-size: 0.5625rem !important; line-height: 1.1 !important; }
+  .resume .resume__skills,
+  .resume .resume__languages { gap: 0.25rem 1rem !important; }
+
+  .resume__photo {
+    background-color: transparent !important;
+    border: 1px solid #131616;
+  }
+
+  .resume__date { display: block !important; }
+  .resume__date-mobile { display: none !important; }
+}
+
+/* --------------------------------
+   Contact Form
+   -------------------------------- */
+.contact-form__field {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.contact-form__input {
+  background: none;
+  border: 1px solid var(--text);
+  color: var(--text);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 0;
+  -webkit-appearance: none;
+  min-width: 0;
+}
+
+.contact-form__input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.contact-form__textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.contact-form__submit {
+  grid-column: 1 / -1;
+  justify-self: start;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.contact-form__submit:hover {
+  opacity: 0.8;
+}
+
+.contact-form__submit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.contact-form__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contact-form__success {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-block: var(--space-xl);
+}
+
+.contact-form__error {
+  color: var(--accent);
+  margin-bottom: var(--space-sm);
+}
+
+/* --------------------------------
+   Print Styles
+   -------------------------------- */
+@media print {
+  .cover,
+  .site-header,
+  .modal-sticky-nav,
+  .modal__close,
+  .skip-link,
+  .grid-reveal {
+    display: none !important;
+  }
+
+  .modal {
+    display: block;
+    min-height: auto;
+  }
+
+  .modal__body {
+    animation: none;
+  }
+
+  .contact-form__submit {
+    display: none;
+  }
+
+  .resume__section {
+    break-inside: avoid;
+  }
+
+  .resume__row {
+    break-inside: avoid;
+  }
+}
+
+/* --------------------------------
+   Snackbar Toast
+   -------------------------------- */
+.snackbar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--text);
+  color: var(--bg);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-family);
+  font-size: var(--body-size);
+  font-weight: 600;
+  line-height: var(--body-line-height);
+  border-radius: 4px;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.snackbar.is-visible {
+  opacity: 1;
+}
+
