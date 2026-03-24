@@ -337,7 +337,7 @@ body {
 }
 
 .portfolio-item {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-lg);
 }
 
 .portfolio-item__info {
@@ -839,7 +839,7 @@ body {
 }
 
 .case-study-block {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-lg);
 }
 
 .case-study-image-placeholder {
