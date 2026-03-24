@@ -705,7 +705,7 @@ body {
 }
 
 .modal__header {
-  padding-block: var(--space-lg);
+  padding-block: var(--space-lg) var(--space-md);
 }
 
 .modal__title-row {
@@ -808,7 +808,7 @@ body {
 }
 
 .modal__body {
-  padding-block: var(--space-lg);
+  padding-block: 0 var(--space-lg);
 }
 
 .portfolio-item__placeholder[data-modal] {
@@ -835,7 +835,7 @@ body {
 
 .case-study-meta .statement {
   margin: 0;
-  padding-bottom: var(--space-sm);
+  padding-bottom: 0;
 }
 
 .case-study-block {
