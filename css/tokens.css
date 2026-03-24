@@ -19,7 +19,7 @@
 
   --label-size: 0.6875rem;
   --label-weight: 600;
-  --label-line-height: 1.25rem;
+  --label-line-height: 1.5;
   --label-tracking: 0.08em;
 
   /* Statement: 22px desktop, scales down to ~18px on mobile */

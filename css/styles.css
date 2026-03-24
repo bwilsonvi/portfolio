@@ -351,6 +351,7 @@ body {
 
 .portfolio-item__text {
   grid-column: 2 / -1;
+  text-transform: none;
 }
 
 .portfolio-item__teaser {
