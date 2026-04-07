@@ -17,6 +17,7 @@
   const downloadBtn = modal.querySelector('.modal__download');
   let savedScrollY = 0;
   let currentModalId = null;
+  let triggerElement = null;
 
   // Prevent browser's automatic scroll restoration from fighting manual restore
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -32,25 +33,39 @@
   // Main page content wrapper — hidden when modal is active
   const pageContent = document.querySelector('.page-content');
 
+  // Focus trap — keeps Tab/Shift+Tab within the modal
+  function trapFocus(e) {
+    if (e.key !== 'Tab') return;
+    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+
   // Statement truncation: truncates text inline with "… Read the full story" button
   // Supports responsive recalculation via ResizeObserver
-  var statementObserver = null;
+  let statementObserver = null;
 
   function setupStatementTruncation(statement) {
-    var fullText = statement.textContent;
-    var words = fullText.split(' ');
-    var expanded = false;
-    var lastWidth = 0;
-    var debounceTimer = null;
+    const fullText = statement.textContent;
+    const words = fullText.split(' ');
+    let expanded = false;
+    let lastWidth = 0;
+    let debounceTimer = null;
 
     function truncate() {
       if (expanded) return;
 
-      var lineHeight = parseFloat(getComputedStyle(statement).lineHeight);
+      const lineHeight = parseFloat(getComputedStyle(statement).lineHeight);
       // 3 lines is the visual target for text
-      var threeLineHeight = lineHeight * 3;
+      const threeLineHeight = lineHeight * 3;
       // Allow 4 lines for measurement to accommodate the inline button
-      var maxHeight = lineHeight * 4;
+      const maxHeight = lineHeight * 4;
 
       // Reset to full text to measure natural height
       statement.textContent = fullText;
@@ -63,7 +78,7 @@
       if (statement.scrollHeight <= maxHeight + 1) return;
 
       // Create the inline button
-      var btn = document.createElement('button');
+      const btn = document.createElement('button');
       btn.className = 'statement__toggle';
       btn.setAttribute('aria-label', 'Read full project description');
       btn.textContent = 'Read more';
@@ -73,12 +88,12 @@
       statement.style.overflow = 'hidden';
       statement.style.maxHeight = maxHeight + 'px';
 
-      var low = 0;
-      var high = words.length;
-      var truncated = '';
+      let low = 0;
+      let high = words.length;
+      let truncated = '';
 
       while (low < high) {
-        var mid = Math.ceil((low + high) / 2);
+        const mid = Math.ceil((low + high) / 2);
         statement.textContent = words.slice(0, mid).join(' ') + '… ';
         statement.appendChild(btn);
 
@@ -106,10 +121,10 @@
       // Handle expand
       btn.onclick = function() {
         expanded = true;
-        var clampedH = statement.clientHeight;
+        const clampedH = statement.clientHeight;
         statement.textContent = fullText;
         statement.style.maxHeight = 'none';
-        var expandedH = statement.scrollHeight;
+        const expandedH = statement.scrollHeight;
 
         // Animate
         statement.style.maxHeight = clampedH + 'px';
@@ -132,7 +147,7 @@
     // Watch for resize — debounced recalculation
     if (typeof ResizeObserver !== 'undefined') {
       statementObserver = new ResizeObserver(function(entries) {
-        var newWidth = entries[0].contentRect.width;
+        const newWidth = entries[0].contentRect.width;
         if (Math.abs(newWidth - lastWidth) < 1) return; // skip sub-pixel changes
         lastWidth = newWidth;
 
@@ -151,6 +166,7 @@
   }
 
   function onModalScroll() {
+    if (!stickyNav) return;
     const st = window.scrollY;
     const delta = st - lastScrollTop;
 
@@ -187,6 +203,7 @@
   }
 
   function setupScrollTracking() {
+    if (!stickyNav) return;
     const modalHeader = modal.querySelector('.modal__header');
     const docHeight = document.documentElement.scrollHeight;
     const viewHeight = window.innerHeight;
@@ -264,7 +281,7 @@
     modalBody.innerHTML = getContent(id);
 
     // Statement read-more: inline truncation with "Read the full story" button
-    var statement = modalBody.querySelector('.statement');
+    const statement = modalBody.querySelector('.statement');
     if (statement) {
       setupStatementTruncation(statement);
     }
@@ -274,6 +291,8 @@
     modal.classList.toggle('modal--resume', id === 'resume');
     modal.classList.add('is-active');
     window.scrollTo(0, 0);
+    modal.focus();
+    modal.addEventListener('keydown', trapFocus);
 
     history.pushState({ modal: id }, '', '#' + id);
     setupScrollTracking();
@@ -284,6 +303,7 @@
 
     teardownScrollTracking();
     teardownStatementTruncation();
+    modal.removeEventListener('keydown', trapFocus);
 
     modal.classList.remove('is-active', 'modal--resume');
     modal.setAttribute('aria-hidden', 'true');
@@ -296,11 +316,16 @@
       pageContent.style.display = '';
     }
     const restoreY = savedScrollY;
+    const returnFocus = triggerElement;
     requestAnimationFrame(function () {
-      requestAnimationFrame(function () { window.scrollTo(0, restoreY); });
+      requestAnimationFrame(function () {
+        window.scrollTo(0, restoreY);
+        if (returnFocus) returnFocus.focus();
+      });
     });
 
     currentModalId = null;
+    triggerElement = null;
 
     if (window.location.hash) {
       history.replaceState(null, '', window.location.pathname);
@@ -308,10 +333,12 @@
   }
 
   // Close button
-  closeBtn.addEventListener('click', function () {
-    if (contactFormHasInput() && !confirm('You have unsent form data. Leave anyway?')) return;
-    history.back();
-  });
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function () {
+      if (contactFormHasInput() && !confirm('You have unsent form data. Leave anyway?')) return;
+      history.back();
+    });
+  }
 
   // Print button
   if (printBtn) {
@@ -323,7 +350,7 @@
   // Download PDF button
   if (downloadBtn) {
     downloadBtn.addEventListener('click', function () {
-      var resume = modalBody.querySelector('.resume');
+      const resume = modalBody.querySelector('.resume');
       if (!resume || typeof html2pdf === 'undefined') return;
       if (downloadBtn.classList.contains('is-busy')) return;
 
@@ -331,7 +358,7 @@
       downloadBtn.classList.add('is-busy');
       resume.classList.add('resume--pdf');
 
-      var opt = {
+      const opt = {
         margin: [15, 20, 15, 20],
         filename: 'resume.pdf',
         image: { type: 'jpeg', quality: 0.98 },
@@ -381,6 +408,7 @@
     if (!trigger) return;
 
     e.preventDefault();
+    triggerElement = trigger;
     openModal(trigger.getAttribute('data-modal'), getTitle(trigger), pendingScrollY);
     pendingScrollY = null;
   });
@@ -396,6 +424,7 @@
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'Sending\u2026';
     submitBtn.disabled = true;
+    submitBtn.setAttribute('aria-busy', 'true');
 
     const controller = new AbortController();
     const timeoutId = setTimeout(function () { controller.abort(); }, SUBMIT_TIMEOUT);
@@ -407,6 +436,7 @@
       signal: controller.signal
     }).then(function (response) {
       clearTimeout(timeoutId);
+      submitBtn.removeAttribute('aria-busy');
       if (!response.ok) throw new Error('Network response was not ok');
       history.back();
       showToast('Message sent');
@@ -414,10 +444,12 @@
       clearTimeout(timeoutId);
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
+      submitBtn.removeAttribute('aria-busy');
       const existing = form.querySelector('.contact-form__error');
       if (existing) existing.remove();
       const error = document.createElement('p');
       error.className = 'contact-form__error body-text';
+      error.setAttribute('role', 'alert');
       error.textContent = err.name === 'AbortError'
         ? 'Request timed out. Please try again.'
         : 'Something went wrong. Please try again.';
@@ -425,10 +457,18 @@
     });
   });
 
-  // Browser back button
+  // Browser back/forward button
   window.addEventListener('popstate', function () {
     if (currentModalId) {
       closeModal();
+    } else if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      if (id) {
+        const trigger = document.querySelector('[data-modal="' + id + '"]');
+        const title = trigger ? getTitle(trigger) : id;
+        triggerElement = trigger;
+        openModal(id, title);
+      }
     }
   });
 
@@ -436,6 +476,8 @@
   function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'snackbar';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
     toast.textContent = message;
     document.body.appendChild(toast);
 
@@ -445,7 +487,9 @@
 
     setTimeout(function () {
       toast.classList.remove('is-visible');
+      const fallback = setTimeout(function () { toast.remove(); }, 500);
       toast.addEventListener('transitionend', function () {
+        clearTimeout(fallback);
         toast.remove();
       });
     }, 3000);

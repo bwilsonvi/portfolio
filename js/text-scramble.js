@@ -22,13 +22,18 @@
     cursorLinger: 1500
   };
 
+  function parseIntOrDefault(value, fallback) {
+    const parsed = parseInt(value, 10);
+    return isNaN(parsed) ? fallback : parsed;
+  }
+
   function getConfig(el) {
     return {
-      speed: parseInt(el.dataset.typingSpeed, 10) || DEFAULTS.speed,
-      variation: parseInt(el.dataset.typingVariation, 10) || DEFAULTS.variation,
-      delay: parseInt(el.dataset.typingDelay, 10) || DEFAULTS.delay,
+      speed: parseIntOrDefault(el.dataset.typingSpeed, DEFAULTS.speed),
+      variation: parseIntOrDefault(el.dataset.typingVariation, DEFAULTS.variation),
+      delay: parseIntOrDefault(el.dataset.typingDelay, DEFAULTS.delay),
       trigger: el.dataset.typingTrigger || DEFAULTS.trigger,
-      cursorLinger: parseInt(el.dataset.typingCursorLinger, 10) || DEFAULTS.cursorLinger
+      cursorLinger: parseIntOrDefault(el.dataset.typingCursorLinger, DEFAULTS.cursorLinger)
     };
   }
 
@@ -86,6 +91,10 @@
     const config = getConfig(el);
 
     if (config.trigger === 'scroll') {
+      if (typeof IntersectionObserver === 'undefined') {
+        setTimeout(function () { typeText(el); }, config.delay);
+        return;
+      }
       let fired = false;
       const observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -122,7 +131,7 @@
     }
 
     if (window.__coverActive) {
-      document.addEventListener('cover:dismissed', startTyping);
+      document.addEventListener('cover:dismissed', startTyping, { once: true });
     } else {
       startTyping();
     }

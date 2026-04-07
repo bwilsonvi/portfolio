@@ -27,7 +27,7 @@
   <style>@supports (view-transition-name: none) { @view-transition { navigation: auto; } }</style>
 </head>
 <body class="theme-studio">
-  <script>sessionStorage.setItem('portfolio_nav', '1');</script>
+  <script src="js/nav-flag.js"></script>
 
   <!-- Netlify Forms: hidden pre-render so build-time scanner detects the form -->
   <form name="contact" netlify hidden>
@@ -38,16 +38,16 @@
 
   <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <div class="page-content">
+  <main class="page-content" id="main-content">
 
   <!-- Header -->
   <header class="site-header">
     <div class="container">
-      <nav class="header-nav">
-        <span class="heading header-nav__name">
+      <nav class="header-nav" aria-label="Main navigation">
+        <h1 class="heading header-nav__name">
           <span class="header-nav__name-full">Brian Wilson</span>
           <span class="header-nav__name-short">Brian W.</span>
-        </span>
+        </h1>
         <a href="index.html" class="heading nav-link header-nav__work">Work</a>
         <span class="heading nav-link nav-link--active header-nav__right header-nav__studio" aria-current="page">Studio</span>
       </nav>
@@ -55,7 +55,7 @@
   </header>
 
   <!-- Info Section -->
-  <section class="info-section" id="main-content">
+  <section class="info-section">
     <div class="container">
       <div class="grid">
         <!-- Group 1: Title -->
@@ -65,38 +65,38 @@
 
         <!-- Group 2: Status & Location -->
         <div class="info-group info-group--status-location">
-          <div class="info-block">
-            <span class="label">Status:</span>
-            <span class="body-text">Open to Work</span>
-          </div>
-          <div class="info-block">
-            <span class="label">Based in:</span>
-            <span class="body-text">Zürich CH</span>
-          </div>
+          <dl class="info-block">
+            <dt class="label">Status:</dt>
+            <dd class="body-text">Open to Work</dd>
+          </dl>
+          <dl class="info-block">
+            <dt class="label">Based in:</dt>
+            <dd class="body-text">Zürich CH</dd>
+          </dl>
         </div>
 
         <!-- Group 3: Experience -->
         <div class="col-1 info-group info-group--experience">
-          <div class="info-block">
-            <span class="label">Formerly:</span>
-            <span class="body-text">Google/<wbr>YouTube</span>
-            <span class="body-text">Microsoft</span>
-            <span class="body-text">IMDb</span>
-          </div>
-          <div class="info-block">
-            <span class="label">Currently<span class="currently-suffix"> at</span>:</span>
-            <span class="body-text">Avaloq/NEC</span>
-          </div>
+          <dl class="info-block">
+            <dt class="label">Formerly:</dt>
+            <dd class="body-text">Google/<wbr>YouTube</dd>
+            <dd class="body-text">Microsoft</dd>
+            <dd class="body-text">IMDb</dd>
+          </dl>
+          <dl class="info-block">
+            <dt class="label">Currently<span class="currently-suffix"> at</span>:</dt>
+            <dd class="body-text">Avaloq/NEC</dd>
+          </dl>
         </div>
 
         <!-- Group 4: About links -->
         <div class="col-1 info-group info-group--about">
-          <div class="info-block">
-            <span class="label">About:</span>
-            <a href="https://www.linkedin.com/in/bwilsonvi/" target="_blank" rel="noopener" class="body-text info-link">Linkedin<span class="material-symbols-outlined external-icon" aria-hidden="true">call_made</span></a>
-            <a href="#" class="body-text info-link" role="button" data-modal="resume">Resume</a>
-            <a href="#" class="body-text info-link" role="button" data-modal="contact">Contact</a>
-          </div>
+          <dl class="info-block">
+            <dt class="label">About:</dt>
+            <dd class="body-text"><a href="https://www.linkedin.com/in/bwilsonvi/" target="_blank" rel="noopener" class="body-text info-link">Linkedin<span class="material-symbols-outlined external-icon" aria-hidden="true">call_made</span><span class="sr-only"> (opens in new tab)</span></a></dd>
+            <dd class="body-text"><a href="#" class="body-text info-link" role="button" data-modal="resume">Resume</a></dd>
+            <dd class="body-text"><a href="#" class="body-text info-link" role="button" data-modal="contact">Contact</a></dd>
+          </dl>
         </div>
       </div>
     </div>
@@ -105,7 +105,7 @@
   <!-- Portfolio Items
        Interactive: add role="button" tabindex="0" data-modal="slug" to __placeholder
        Static:      omit those three attributes -->
-  <section class="portfolio-section">
+  <section class="portfolio-section" aria-label="Portfolio projects">
     <div class="container">
 
       <article class="portfolio-item">
@@ -156,7 +156,7 @@
     </div>
   </section>
 
-  </div><!-- .page-content -->
+  </main><!-- .page-content -->
 
   <!-- Modal Overlay -->
   <div class="modal" id="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-title" tabindex="-1">
@@ -385,28 +385,28 @@
   <template id="tmpl-s-01">
     <div class="case-study-meta grid">
       <p class="statement col-4 col-tablet-8 col-desktop-12">Switzerland's free one-hour blue zone parking appears simple. Find a blue zone, park your vehicle, set your parking disc. However, new residents must first learn to set their parking disc correctly. The parking disc must always be rounded to the next half-hour mark rather than set to the actual arrival time. For example, arriving at 9:01 means setting the disc to 9:30, which allows parking until 10:30 — nearly ninety minutes in what is labeled a one-hour zone. Some may find this rounding of arrival time counterintuitive when comparing to other timed parking experiences which emphasize arrival time. Even more confusing are the hidden exceptions, like the lunch period, where arriving at 11:30 and rounding the disc to 12:00 extends parking through the midday enforcement pause to 14:30 — nearly three hours in a one-hour blue zone. This relative complexity is compounded by local variations. While Switzerland sets one national default, individual communities can override the blue zone rules by changing enforcement hours, adding Sunday restrictions, or adjusting duration limits. For example, the end enforcement time that applies in Zürich may not apply in Basel. For new residents, tourists, and especially those unfamiliar with Swiss parking conventions, the result is the same: uncertainty, mental arithmetic, and the persistent worry of returning to a fine. Despite being free and often generous, the blue zone parking disc experience is one of parking confusion rather than simple, confident parking. This app addresses that gap directly. It automatically calculates the correct duration based on arrival time and local rules, which the user confirms to account for community-specific overrides, and provides a convenient, no-thinking-required personal reminder so users never overstay.</p>
-      <div class="info-block col-1 col-tablet-1 col-desktop-1">
-        <span class="label">Year</span>
-        <span class="body-text">2026</span>
-      </div>
-      <div class="info-block col-3 col-tablet-2 col-desktop-2">
-        <span class="label">Role</span>
-        <span class="body-text">UX UI Product Design & Development</span>
-      </div>
-      <div class="info-block col-1 col-tablet-2 col-desktop-2">
-        <span class="label">Success Signal</span>
-        <span class="body-text">Unlisted App Store submission pending</span>
-      </div>
-      <div class="info-block col-3 col-tablet-3 col-desktop-7">
-        <span class="label">Collaborated With</span>
-        <span class="body-text">This was a solo project, spanning concept and design through to development with Swift and Xcode.</span>
-      </div>
+      <dl class="info-block col-1 col-tablet-1 col-desktop-1">
+        <dt class="label">Year</dt>
+        <dd class="body-text">2026</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-2 col-desktop-2">
+        <dt class="label">Role</dt>
+        <dd class="body-text">UX UI Product Design & Development</dd>
+      </dl>
+      <dl class="info-block col-1 col-tablet-2 col-desktop-2">
+        <dt class="label">Success Signal</dt>
+        <dd class="body-text">Unlisted App Store submission pending</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-3 col-desktop-7">
+        <dt class="label">Collaborated With</dt>
+        <dd class="body-text">This was a solo project, spanning concept and design through to development with Swift and Xcode.</dd>
+      </dl>
     </div>
     <div class="case-study-content">
       <div class="case-study-block">
         <picture>
           <source srcset="images/s-01/s-01-1.webp" type="image/webp">
-          <img src="images/s-01/s-01-1.png" alt="Parking Disc Helper app screenshot" loading="lazy" width="2400" height="1480">
+          <img src="images/s-01/s-01-1.png" alt="Parking Disc Helper core experience showing disc setting, reminder, and lock screen alerts" loading="lazy" width="2400" height="1480">
         </picture>
         <div class="portfolio-item__info grid">
           <span class="label portfolio-item__number">S1.1</span>
@@ -446,7 +446,7 @@
       <div class="case-study-block">
         <picture>
           <source srcset="images/s-01/s-01-5.webp" type="image/webp">
-          <img src="images/s-01/s-01-5.png" alt="Parking Disc Helper app screenshot" loading="lazy" width="2400" height="1480">
+          <img src="images/s-01/s-01-5.png" alt="Parking Disc Helper app icon design and welcome screen" loading="lazy" width="2400" height="1480">
         </picture>
         <div class="portfolio-item__info grid">
           <span class="label portfolio-item__number">S1.5</span>
@@ -456,7 +456,7 @@
       <div class="case-study-block">
         <picture>
           <source srcset="images/s-01/s-01-6.webp" type="image/webp">
-          <img src="images/s-01/s-01-6.png" alt="Parking Disc Helper app screenshot" loading="lazy" width="2400" height="1480">
+          <img src="images/s-01/s-01-6.png" alt="Parking Disc Helper parking configuration settings screens" loading="lazy" width="2400" height="1480">
         </picture>
         <div class="portfolio-item__info grid">
           <span class="label portfolio-item__number">S1.6</span>
@@ -466,7 +466,7 @@
       <div class="case-study-block">
         <picture>
           <source srcset="images/s-01/s-01-7.webp" type="image/webp">
-          <img src="images/s-01/s-01-7.png" alt="Parking Disc Helper app screenshot" loading="lazy" width="2400" height="1480">
+          <img src="images/s-01/s-01-7.png" alt="Parking Disc Helper learn more panel with official source links" loading="lazy" width="2400" height="1480">
         </picture>
         <div class="portfolio-item__info grid">
           <span class="label portfolio-item__number">S1.7</span>
@@ -476,7 +476,7 @@
       <div class="case-study-block">
         <picture>
           <source srcset="images/s-01/s-01-8.webp" type="image/webp">
-          <img src="images/s-01/s-01-8.png" alt="Parking Disc Helper app screenshot" loading="lazy" width="2400" height="1480">
+          <img src="images/s-01/s-01-8.png" alt="Parking Disc Helper disc-setting interaction and active reminder screen" loading="lazy" width="2400" height="1480">
         </picture>
         <div class="portfolio-item__info grid">
           <span class="label portfolio-item__number">S1.8</span>
@@ -486,7 +486,7 @@
       <div class="case-study-block">
         <picture>
           <source srcset="images/s-01/s-01-9.webp" type="image/webp">
-          <img src="images/s-01/s-01-9.png" alt="Parking Disc Helper app screenshot" loading="lazy" width="2400" height="1480">
+          <img src="images/s-01/s-01-9.png" alt="Parking Disc Helper on Dynamic Island, widgets, and Live Activity" loading="lazy" width="2400" height="1480">
         </picture>
         <div class="portfolio-item__info grid">
           <span class="label portfolio-item__number">S1.9</span>
@@ -496,7 +496,7 @@
       <div class="case-study-block">
         <picture>
           <source srcset="images/s-01/s-01-10.webp" type="image/webp">
-          <img src="images/s-01/s-01-10.png" alt="Parking Disc Helper app screenshot" loading="lazy" width="2400" height="1480">
+          <img src="images/s-01/s-01-10.png" alt="Parking Disc Helper non-enforcement and expired reminder states" loading="lazy" width="2400" height="1480">
         </picture>
         <div class="portfolio-item__info grid">
           <span class="label portfolio-item__number">S1.10</span>
@@ -506,7 +506,7 @@
       <div class="case-study-block">
         <picture>
           <source srcset="images/s-01/s-01-11.webp" type="image/webp">
-          <img src="images/s-01/s-01-11.png" alt="Parking Disc Helper app screenshot" loading="lazy" width="2400" height="1480">
+          <img src="images/s-01/s-01-11.png" alt="Parking Disc Helper disc illustration design detail" loading="lazy" width="2400" height="1480">
         </picture>
         <div class="portfolio-item__info grid">
           <span class="label portfolio-item__number">S1.11</span>
@@ -518,22 +518,22 @@
   <template id="tmpl-s-02">
     <div class="case-study-meta grid">
       <p class="statement col-4 col-tablet-8 col-desktop-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      <div class="info-block col-1 col-tablet-1 col-desktop-1">
-        <span class="label">Year</span>
-        <span class="body-text">0000</span>
-      </div>
-      <div class="info-block col-3 col-tablet-2 col-desktop-2">
-        <span class="label">Role</span>
-        <span class="body-text">UX UI Product Design</span>
-      </div>
-      <div class="info-block col-1 col-tablet-2 col-desktop-2">
-        <span class="label">Success Signal</span>
-        <span class="body-text">Lorem Ipsum</span>
-      </div>
-      <div class="info-block col-3 col-tablet-3 col-desktop-7">
-        <span class="label">Collaborated With</span>
-        <span class="body-text">Lorem, Ipsum, Dolor, Sit Amet</span>
-      </div>
+      <dl class="info-block col-1 col-tablet-1 col-desktop-1">
+        <dt class="label">Year</dt>
+        <dd class="body-text">0000</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-2 col-desktop-2">
+        <dt class="label">Role</dt>
+        <dd class="body-text">UX UI Product Design</dd>
+      </dl>
+      <dl class="info-block col-1 col-tablet-2 col-desktop-2">
+        <dt class="label">Success Signal</dt>
+        <dd class="body-text">Lorem Ipsum</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-3 col-desktop-7">
+        <dt class="label">Collaborated With</dt>
+        <dd class="body-text">Lorem, Ipsum, Dolor, Sit Amet</dd>
+      </dl>
     </div>
     <div class="case-study-content">
       <div class="case-study-block">
@@ -576,22 +576,22 @@
   <template id="tmpl-s-03">
     <div class="case-study-meta grid">
       <p class="statement col-4 col-tablet-8 col-desktop-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      <div class="info-block col-1 col-tablet-1 col-desktop-1">
-        <span class="label">Year</span>
-        <span class="body-text">0000</span>
-      </div>
-      <div class="info-block col-3 col-tablet-2 col-desktop-2">
-        <span class="label">Role</span>
-        <span class="body-text">UX UI Product Design</span>
-      </div>
-      <div class="info-block col-1 col-tablet-2 col-desktop-2">
-        <span class="label">Success Signal</span>
-        <span class="body-text">Lorem Ipsum</span>
-      </div>
-      <div class="info-block col-3 col-tablet-3 col-desktop-7">
-        <span class="label">Collaborated With</span>
-        <span class="body-text">Lorem, Ipsum, Dolor, Sit Amet</span>
-      </div>
+      <dl class="info-block col-1 col-tablet-1 col-desktop-1">
+        <dt class="label">Year</dt>
+        <dd class="body-text">0000</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-2 col-desktop-2">
+        <dt class="label">Role</dt>
+        <dd class="body-text">UX UI Product Design</dd>
+      </dl>
+      <dl class="info-block col-1 col-tablet-2 col-desktop-2">
+        <dt class="label">Success Signal</dt>
+        <dd class="body-text">Lorem Ipsum</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-3 col-desktop-7">
+        <dt class="label">Collaborated With</dt>
+        <dd class="body-text">Lorem, Ipsum, Dolor, Sit Amet</dd>
+      </dl>
     </div>
     <div class="case-study-content">
       <div class="case-study-block">
@@ -634,22 +634,22 @@
   <template id="tmpl-s-04">
     <div class="case-study-meta grid">
       <p class="statement col-4 col-tablet-8 col-desktop-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      <div class="info-block col-1 col-tablet-1 col-desktop-1">
-        <span class="label">Year</span>
-        <span class="body-text">0000</span>
-      </div>
-      <div class="info-block col-3 col-tablet-2 col-desktop-2">
-        <span class="label">Role</span>
-        <span class="body-text">UX UI Product Design</span>
-      </div>
-      <div class="info-block col-1 col-tablet-2 col-desktop-2">
-        <span class="label">Success Signal</span>
-        <span class="body-text">Lorem Ipsum</span>
-      </div>
-      <div class="info-block col-3 col-tablet-3 col-desktop-7">
-        <span class="label">Collaborated With</span>
-        <span class="body-text">Lorem, Ipsum, Dolor, Sit Amet</span>
-      </div>
+      <dl class="info-block col-1 col-tablet-1 col-desktop-1">
+        <dt class="label">Year</dt>
+        <dd class="body-text">0000</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-2 col-desktop-2">
+        <dt class="label">Role</dt>
+        <dd class="body-text">UX UI Product Design</dd>
+      </dl>
+      <dl class="info-block col-1 col-tablet-2 col-desktop-2">
+        <dt class="label">Success Signal</dt>
+        <dd class="body-text">Lorem Ipsum</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-3 col-desktop-7">
+        <dt class="label">Collaborated With</dt>
+        <dd class="body-text">Lorem, Ipsum, Dolor, Sit Amet</dd>
+      </dl>
     </div>
     <div class="case-study-content">
       <div class="case-study-block">
@@ -692,22 +692,22 @@
   <template id="tmpl-s-05">
     <div class="case-study-meta grid">
       <p class="statement col-4 col-tablet-8 col-desktop-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      <div class="info-block col-1 col-tablet-1 col-desktop-1">
-        <span class="label">Year</span>
-        <span class="body-text">0000</span>
-      </div>
-      <div class="info-block col-3 col-tablet-2 col-desktop-2">
-        <span class="label">Role</span>
-        <span class="body-text">UX UI Product Design</span>
-      </div>
-      <div class="info-block col-1 col-tablet-2 col-desktop-2">
-        <span class="label">Success Signal</span>
-        <span class="body-text">Lorem Ipsum</span>
-      </div>
-      <div class="info-block col-3 col-tablet-3 col-desktop-7">
-        <span class="label">Collaborated With</span>
-        <span class="body-text">Lorem, Ipsum, Dolor, Sit Amet</span>
-      </div>
+      <dl class="info-block col-1 col-tablet-1 col-desktop-1">
+        <dt class="label">Year</dt>
+        <dd class="body-text">0000</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-2 col-desktop-2">
+        <dt class="label">Role</dt>
+        <dd class="body-text">UX UI Product Design</dd>
+      </dl>
+      <dl class="info-block col-1 col-tablet-2 col-desktop-2">
+        <dt class="label">Success Signal</dt>
+        <dd class="body-text">Lorem Ipsum</dd>
+      </dl>
+      <dl class="info-block col-3 col-tablet-3 col-desktop-7">
+        <dt class="label">Collaborated With</dt>
+        <dd class="body-text">Lorem, Ipsum, Dolor, Sit Amet</dd>
+      </dl>
     </div>
     <div class="case-study-content">
       <div class="case-study-block">

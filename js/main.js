@@ -21,7 +21,6 @@
     overlay.className = 'grid-reveal';
     overlay.style.animation = 'none';
     overlay.style.opacity = '1';
-    overlay.style.zIndex = '99999';
     overlay.setAttribute('aria-hidden', 'true');
 
     const container = document.createElement('div');
