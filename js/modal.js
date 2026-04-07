@@ -161,6 +161,11 @@
       return;
     }
 
+    // Once past the top, make it always sticky (no position change later)
+    if (!stickyNav.classList.contains('is-sticky')) {
+      stickyNav.classList.add('is-sticky', 'is-hidden');
+    }
+
     if (Math.abs(delta) > DEAD_ZONE) {
       const nowDown = delta > 0;
 
@@ -170,17 +175,11 @@
       }
 
       if (nowDown) {
-        if (stickyNav.classList.contains('is-sticky')) {
-          stickyNav.classList.add('is-hidden');
-        }
+        stickyNav.classList.add('is-hidden');
       } else {
         const upDistance = directionChangeTop - st;
         if (upDistance >= SHOW_THRESHOLD) {
-          if (!stickyNav.classList.contains('is-sticky')) {
-            stickyNav.classList.add('is-sticky');
-          } else {
-            stickyNav.classList.remove('is-hidden');
-          }
+          stickyNav.classList.remove('is-hidden');
         }
       }
       lastScrollTop = st;
